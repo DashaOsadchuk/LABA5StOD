@@ -1,7 +1,6 @@
-package xyz.dragonnest.saesentsessis;
+package com.main;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class HashTable<K, V> {
     private ArrayList<Node<K,V>> array;
@@ -19,10 +18,7 @@ public class HashTable<K, V> {
     public void put(K key, V data) {
         int hashKey = convert(key);
         Node<K,V> newOne = new Node<>(key, data);
-        Node<K, V> parent = null;
-        if (this.array.size() > hashKey) {
-            parent = this.array.get(hashKey);
-        }
+        Node<K, V> parent = this.array.get(hashKey);
         if (parent == null) {
             this.array.set(hashKey, newOne);
             this.nodesFilled++;
@@ -39,22 +35,6 @@ public class HashTable<K, V> {
 
     public boolean contains(K key) {
         return this.array.get(convert(key)) != null;
-    }
-
-    public void remove(K key) {
-        int hashKey = convert(key);
-        Node<K,V> current = this.array.get(hashKey);
-        if (current == null) return;
-        if (current.getNext() != null) {
-            Node<K,V> child = current.getNext();
-            this.array.remove(hashKey);
-            this.array.add(hashKey, child);
-            child.setPrev(null);
-            this.fullFill--;
-        } else {
-            this.array.remove(hashKey);
-            this.nodesFilled--; this.fullFill--;
-        }
     }
 
     public int capacity() {

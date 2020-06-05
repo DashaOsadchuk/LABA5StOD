@@ -1,4 +1,4 @@
-package xyz.dragonnest.saesentsessis;
+package com.main;
 
 public class Node<K,V> {
     private Node<K,V> next;
